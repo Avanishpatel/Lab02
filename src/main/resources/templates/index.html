@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="UTF-8">
+    <title>Stock CRUD App</title>
+</head>
+<body>
+<h1>Welcome to the Stock CRUD App</h1>
+
+<form th:action="@{/saveData}">
+    <input type="submit" value="Save Data Locally">
+
+</form>
+
+<p th:text="${message}"></p>
+
+</body>
+</html>
