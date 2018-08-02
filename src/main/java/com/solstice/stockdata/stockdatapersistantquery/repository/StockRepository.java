@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public abstract class StockRepository implements CrudRepository<Stock, String> {
-    
+
 }
