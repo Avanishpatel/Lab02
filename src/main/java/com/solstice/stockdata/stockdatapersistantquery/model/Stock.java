@@ -1,15 +1,16 @@
 package com.solstice.stockdata.stockdatapersistantquery.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "stock")
+@Table(name = "stock_data")
 public class Stock {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long id;
     @Column(name = "symbol")
     private String symbol;
     @Column(name = "price")
