@@ -5,6 +5,26 @@ import java.util.Date;
 
 @Entity
 @Table(name = "stock_data")
+@NamedNativeQuery(name = "Stock.getDataBySymbolAndDay",
+        query = "select *" +
+        " from (" +
+        " select max(price), min(price),sum(volume) " +
+        "        from stock_data " +
+        "        where symbol=:symbol and day(date)=day(:date)) as x," +
+        " ( " +
+        "        select price " +
+        "        from stock_data " +
+        "        where symbol=:symbol and day(date)=day(:date) ORDER BY date DESC LIMIT 1) as y",resultClass = AggregatedData.class, resultSetMapping = "aggregatedData")
+@SqlResultSetMapping(
+        name = "aggregatedData",
+        classes = @ConstructorResult(targetClass = AggregatedData.class,
+        columns = {
+                @ColumnResult(name = "max(price)", type = Double.class),
+                @ColumnResult(name = "min(price)", type = Double.class),
+                @ColumnResult(name = "sum(volume)", type = Long.class),
+                @ColumnResult(name = "price", type = Double.class)
+        })
+)
 public class Stock {
 
     @Id
