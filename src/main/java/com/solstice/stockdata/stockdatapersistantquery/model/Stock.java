@@ -5,16 +5,30 @@ import java.util.Date;
 
 @Entity
 @Table(name = "stock_data")
-@NamedNativeQuery(name = "Stock.getDataBySymbolAndDay",
-        query = "select *" +
-        " from (" +
-        " select max(price), min(price),sum(volume) " +
-        "        from stock_data " +
-        "        where symbol=:symbol and day(date)=day(:date)) as x," +
-        " ( " +
-        "        select price " +
-        "        from stock_data " +
-        "        where symbol=:symbol and day(date)=day(:date) ORDER BY date DESC LIMIT 1) as y",resultClass = AggregatedData.class, resultSetMapping = "aggregatedData")
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Stock.getDataBySymbolAndDay",
+                query = "select *" +
+                        " from (" +
+                        " select max(price), min(price),sum(volume) " +
+                        "        from stock_data " +
+                        "        where symbol=:symbol and day(date)=day(:date)) as x," +
+                        " ( " +
+                        "        select price " +
+                        "        from stock_data " +
+                        "        where symbol=:symbol and day(date)=day(:date) ORDER BY date DESC LIMIT 1) as y", resultClass = AggregatedData.class, resultSetMapping = "aggregatedData"),
+
+        @NamedNativeQuery(name = "Stock.getDataBySymbolAndMonth",
+                query = "select *" +
+                        " from (" +
+                        " select max(price), min(price),sum(volume) " +
+                        "        from stock_data " +
+                        "        where symbol=:symbol and month(date)=:month) as x," +
+                        " ( " +
+                        "        select price " +
+                        "        from stock_data " +
+                        "        where symbol=:symbol and month(date)=:month ORDER BY date DESC LIMIT 1) as y", resultClass = AggregatedData.class, resultSetMapping = "aggregatedData")
+})
+
 @SqlResultSetMapping(
         name = "aggregatedData",
         classes = @ConstructorResult(targetClass = AggregatedData.class,

@@ -44,12 +44,12 @@ public class StockService {
         }
     }
 
-    public void storeDataLocally() {
+    public void storeDataLocally(String url) {
 
         InputStream input = null;
         OutputStream output = null;
         try {
-            input = new URL("https://bootcamp-training-files.cfapps.io/week2/week2-stocks.json").openStream();
+            input = new URL(url).openStream();
             output = new FileOutputStream("/Users/avanishpatel/Downloads/stock-data-persistant-query/src/main/resources/json/output.json");
 
         } catch (IOException e) {
@@ -71,5 +71,10 @@ public class StockService {
     public AggregatedData findByNameAndDate(String symbol, Timestamp date) {
 
         return stockRepository.getDataBySymbolAndDay(symbol, date);
+    }
+
+    public AggregatedData findByNameAndMonth(String symbol, String month) {
+
+        return stockRepository.getDataBySymbolAndMonth(symbol, month);
     }
 }

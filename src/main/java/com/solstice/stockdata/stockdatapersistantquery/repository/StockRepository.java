@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NamedQuery;
 import java.sql.Timestamp;
 
 
@@ -33,4 +32,6 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
     @Query(nativeQuery = true)
     AggregatedData getDataBySymbolAndDay(@Param("symbol") String symbol,@Param("date") Timestamp date);
 
+    @Query(nativeQuery = true)
+    AggregatedData getDataBySymbolAndMonth(@Param("symbol") String symbol, @Param("month") String month);
 }
