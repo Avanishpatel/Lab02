@@ -2,11 +2,9 @@ package com.solstice.stockdata.stockdatapersistantquery.controller;
 
 import com.solstice.stockdata.stockdatapersistantquery.model.AggregatedData;
 import com.solstice.stockdata.stockdatapersistantquery.service.StockService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,16 +18,14 @@ public class StockController {
     StockService stockService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String stockIndex(){
+    public String stockIndex() {
         return "Welcome to Stock Application";
     }
 
-    @RequestMapping(value = "/load/{url}", method = RequestMethod.POST)
-    public String saveAllToDatabase(@PathVariable("url") String url) {
+    @RequestMapping(value = "/load", method = RequestMethod.POST)
+    public String saveAllToDatabase() {
 
-        stockService.storeDataLocally(url);
         stockService.insertDataToDatabase();
-
         return "Data inserted into database";
     }
 

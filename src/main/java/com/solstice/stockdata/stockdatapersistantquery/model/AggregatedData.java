@@ -3,7 +3,7 @@ package com.solstice.stockdata.stockdatapersistantquery.model;
 
 import java.io.Serializable;
 
-public class AggregatedData implements Serializable {
+public class AggregatedData{
 
     private double highestPrice;
     private double lowestPrice;
