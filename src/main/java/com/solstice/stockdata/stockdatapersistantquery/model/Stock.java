@@ -22,11 +22,11 @@ import java.util.Date;
                         " from (" +
                         " select max(price), min(price),sum(volume) " +
                         "        from stock_data " +
-                        "        where symbol=:symbol and month(date)=:month) as x," +
+                        "        where symbol=:symbol and month(date)=month(:month)) as x," +
                         " ( " +
                         "        select price " +
                         "        from stock_data " +
-                        "        where symbol=:symbol and month(date)=:month ORDER BY date DESC LIMIT 1) as y", resultClass = AggregatedData.class, resultSetMapping = "aggregatedData")
+                        "        where symbol=:symbol and month(date)=month(:month) ORDER BY date DESC LIMIT 1) as y", resultClass = AggregatedData.class, resultSetMapping = "aggregatedData")
 })
 
 @SqlResultSetMapping(

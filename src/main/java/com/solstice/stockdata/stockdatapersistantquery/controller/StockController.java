@@ -42,7 +42,11 @@ public class StockController {
     @RequestMapping(value = "/{symbol}/month/{month}")
     public AggregatedData getAggregatedDataByMonth(@PathVariable("symbol") String symbol, @PathVariable("month") String month) throws ParseException {
 
-        return stockService.findByNameAndMonth(symbol, month);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = dateFormat.parse(month);
+        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+
+        return stockService.findByNameAndMonth(symbol, timestamp);
 
     }
 

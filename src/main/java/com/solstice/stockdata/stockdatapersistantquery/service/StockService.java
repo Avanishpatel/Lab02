@@ -42,7 +42,7 @@ public class StockService {
         return stockRepository.getDataBySymbolAndDay(symbol, date);
     }
 
-    public AggregatedData findByNameAndMonth(String symbol, String month) {
+    public AggregatedData findByNameAndMonth(String symbol, Timestamp month) {
 
         return stockRepository.getDataBySymbolAndMonth(symbol, month);
     }

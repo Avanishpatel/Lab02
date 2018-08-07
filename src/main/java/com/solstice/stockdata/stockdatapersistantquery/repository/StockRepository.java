@@ -15,5 +15,5 @@ public interface StockRepository extends CrudRepository<Stock, Long> {
     AggregatedData getDataBySymbolAndDay(@Param("symbol") String symbol, @Param("date") Timestamp date);
 
     @Query(nativeQuery = true)
-    AggregatedData getDataBySymbolAndMonth(@Param("symbol") String symbol, @Param("month") String month);
+    AggregatedData getDataBySymbolAndMonth(@Param("symbol") String symbol, @Param("month") Timestamp month);
 }
