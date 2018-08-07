@@ -33,10 +33,12 @@ public class StockController {
         return stockService.findByNameAndDate(symbol, date);
     }
 
-    @RequestMapping(value = "/{symbol}/month/{month}")
-    public AggregatedData getAggregatedDataByMonth(@PathVariable("symbol") String symbol, @PathVariable("month") String month) {
+    @RequestMapping(value = "/{symbol}/month/{month}/year/{year}")
+    public AggregatedData getAggregatedDataByMonth(@PathVariable("symbol") String symbol, @PathVariable("month") int month,@PathVariable("year") int year) {
 
-        return stockService.findByNameAndMonth(symbol, month);
+        String date = year+"-"+month+"-"+01;
+
+        return stockService.findByNameAndMonth(symbol, date);
     }
 
 
