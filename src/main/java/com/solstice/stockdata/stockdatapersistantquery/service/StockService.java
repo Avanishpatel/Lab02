@@ -7,9 +7,13 @@ import com.solstice.stockdata.stockdatapersistantquery.model.Stock;
 import com.solstice.stockdata.stockdatapersistantquery.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.io.*;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,13 +41,33 @@ public class StockService {
         }
     }
 
-    public AggregatedData findByNameAndDate(String symbol, Timestamp date) {
+    public AggregatedData findByNameAndDate(String symbol, String date) {
 
-        return stockRepository.getDataBySymbolAndDay(symbol, date);
+        String symbolCapitalized = symbol.toUpperCase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+
+        return stockRepository.getDataBySymbolAndDay(symbolCapitalized, timestamp);
     }
 
-    public AggregatedData findByNameAndMonth(String symbol, Timestamp month) {
+    public AggregatedData findByNameAndMonth(String symbol, String month) {
 
-        return stockRepository.getDataBySymbolAndMonth(symbol, month);
+        String symbolCapitalized = symbol.toUpperCase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(month);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+
+        return stockRepository.getDataBySymbolAndMonth(symbolCapitalized, timestamp);
     }
 }

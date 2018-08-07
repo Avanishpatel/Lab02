@@ -2,13 +2,11 @@ package com.solstice.stockdata.stockdatapersistantquery.controller;
 
 import com.solstice.stockdata.stockdatapersistantquery.model.AggregatedData;
 import com.solstice.stockdata.stockdatapersistantquery.service.StockService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/stock")
@@ -30,24 +28,15 @@ public class StockController {
     }
 
     @RequestMapping(value = "/{symbol}/{date}", method = RequestMethod.GET)
-    public AggregatedData getAggregatedDataByDay(@PathVariable("symbol") String symbol, @PathVariable("date") String date) throws ParseException {
+    public AggregatedData getAggregatedDataByDay(@PathVariable("symbol") String symbol, @PathVariable("date") String date) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedDate = dateFormat.parse(date);
-        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-
-        return stockService.findByNameAndDate(symbol, timestamp);
+        return stockService.findByNameAndDate(symbol, date);
     }
 
     @RequestMapping(value = "/{symbol}/month/{month}")
-    public AggregatedData getAggregatedDataByMonth(@PathVariable("symbol") String symbol, @PathVariable("month") String month) throws ParseException {
+    public AggregatedData getAggregatedDataByMonth(@PathVariable("symbol") String symbol, @PathVariable("month") String month) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedDate = dateFormat.parse(month);
-        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-
-        return stockService.findByNameAndMonth(symbol, timestamp);
-
+        return stockService.findByNameAndMonth(symbol, month);
     }
 
 

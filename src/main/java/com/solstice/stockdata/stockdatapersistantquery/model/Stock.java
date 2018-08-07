@@ -32,12 +32,12 @@ import java.util.Date;
 @SqlResultSetMapping(
         name = "aggregatedData",
         classes = @ConstructorResult(targetClass = AggregatedData.class,
-        columns = {
-                @ColumnResult(name = "max(price)", type = Double.class),
-                @ColumnResult(name = "min(price)", type = Double.class),
-                @ColumnResult(name = "sum(volume)", type = Long.class),
-                @ColumnResult(name = "price", type = Double.class)
-        })
+                columns = {
+                        @ColumnResult(name = "max(price)", type = Double.class),
+                        @ColumnResult(name = "min(price)", type = Double.class),
+                        @ColumnResult(name = "sum(volume)", type = Long.class),
+                        @ColumnResult(name = "price", type = Double.class)
+                })
 )
 public class Stock {
 
@@ -54,7 +54,8 @@ public class Stock {
     @Column(name = "date")
     private Date date;
 
-    public Stock(){}
+    public Stock() {
+    }
 
     public Stock(String symbol, Double price, int volume, Date date) {
         this.symbol = symbol;

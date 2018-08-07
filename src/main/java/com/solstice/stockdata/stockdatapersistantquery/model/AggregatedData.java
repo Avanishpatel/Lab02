@@ -1,16 +1,15 @@
 package com.solstice.stockdata.stockdatapersistantquery.model;
 
 
-import java.io.Serializable;
-
-public class AggregatedData{
+public class AggregatedData {
 
     private double highestPrice;
     private double lowestPrice;
     private long totalTrade;
     private double closingPrice;
 
-    public AggregatedData(){}
+    public AggregatedData() {
+    }
 
     public AggregatedData(double highestPrice, double lowestPrice, long totalTrade, double closingPrice) {
         this.highestPrice = highestPrice;
