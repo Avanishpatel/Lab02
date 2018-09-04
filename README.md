@@ -1,2 +1,2 @@
 # Lab02
-Jenkins pipeline test
+Jenkins pipeline test demo
