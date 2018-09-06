@@ -1,2 +1,2 @@
 # Lab02
-Jenkins test 123
+Jenkins test
